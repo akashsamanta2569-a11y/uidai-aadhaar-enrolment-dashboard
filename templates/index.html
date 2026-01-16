@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AadhaarGati Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+    <div class="logo">
+        <div class="logo-icon">
+            <i class="fas fa-fingerprint"></i>
+        </div>
+        <div class="logo-text">
+            <span class="main-text">AADHAAR<span class="highlight">GATI</span></span>
+            <span class="sub-text">ANALYTICS DASHBOARD</span>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#home" class="nav-link active" onclick="setActive(this)">Home</a></li>
+            <li><a href="#about" class="nav-link" onclick="setActive(this)">About</a></li>
+            <li><a href="#dashboard" class="nav-link" onclick="setActive(this)">Dashboard</a></li>
+            <li><a href="#insights" class="nav-link" onclick="setActive(this)">Insights</a></li>
+        </ul>
+    </nav>
+</header>
+    <section id="home" class="hero">
+        <h1>UIDAI Aadhaar Enrolment <br><span class="highlight">Dashboard</span></h1>
+        <p>Turning Government Open Data into Actionable Insights. This project analyzes Aadhaar enrolment data from <b>data.gov.in</b> to identify patterns, trends, and demographic insights.</p>
+        <a href="#dashboard" onclick="document.querySelector('a[href=\'#dashboard\']').click()">
+            <button class="btn-glow">View Analysis</button>
+        </a>
+    </section>
+
+    <section id="about">
+        <div class="info-section">
+            <h3><i class="fas fa-database" style="color:var(--neon-green); margin-right:10px;"></i> Work Function and Purpose of data.gov.in</h3>
+            <p>data.gov.in is the Government of India's open-data platform designed to make government datasets publicly available for transparency, innovation, and informed decision-making. It bridges the gap between government data and citizens.</p>
+        </div>
+
+        <h2 class="section-title">Who Uses <span class="highlight">This Platform</span></h2>
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3>Students</h3>
+                <p>Learn from real-world datasets and build academic projects.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-code"></i></div>
+                <h3>Developers</h3>
+                <p>Create innovative applications using government open data.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-flask"></i></div>
+                <h3>Researchers</h3>
+                <p>Conduct studies and analysis on authentic government datasets.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-users"></i></div>
+                <h3>Citizens</h3>
+                <p>Stay informed and engaged with transparent government data.</p>
+            </div>
+        </div>
+    </section>
+
+   <section id="dashboard">
+        
+        <h2 class="section-title">State-wise Aadhaar <span class="highlight">Enrolment Analysis</span></h2>
+        <div class="chart-wrapper">
+            <canvas id="ageChart"></canvas>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 50px;">AI Future <span class="highlight">Prediction (2026-2028)</span></h2>
+        <div class="chart-wrapper">
+            <canvas id="predictionChart"></canvas>
+        </div>
+
+    </section>
+
+    <section id="insights">
+        <div class="insight-box">
+            <div class="insight-icon"><i class="far fa-lightbulb"></i></div>
+            <div class="insight-content">
+                <h4>Key Data Insight</h4>
+                <p>
+                    The data highlights a <strong>demographic shift</strong>: New Aadhaar enrolments in top states are dominated by the 
+                    <strong>0-5 and 5-17 age groups</strong>. This suggests near-100% coverage among adults, shifting the focus of 
+                    enrolment centers to <strong>child updates and newborn registration</strong>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>UIDAI Data Hackathon Project | Built using Government Open Data (data.gov.in)</p>
+        <p>&copy; 2026 AadhaarGati Dashboard. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --- EXISTING CHART CODE (Keep your AgeChart code here) --- 
+        // ... (Don't delete the code for ageChart) ...
+
+
+        // --- NEW PREDICTION CHART CODE ---
+        const years = {{ years | tojson | safe }};
+        const pastData = {{ past_enrolment | tojson | safe }};
+        const futureData = {{ future_enrolment | tojson | safe }};
+
+        const ctx2 = document.getElementById("predictionChart").getContext("2d");
+
+        new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: years,
+                datasets: [
+                    {
+                        label: "Historical Data (2015-2025)",
+                        data: pastData,
+                        borderColor: "#39ff14", // Neon Green
+                        backgroundColor: "rgba(57, 255, 20, 0.2)",
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 4
+                    },
+                    {
+                        label: "AI Prediction (2026-2028)",
+                        data: futureData,
+                        borderColor: "#ffffff", // White for Future
+                        borderDash: [10, 5],    // Dashed Line
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointBackgroundColor: "#fff"
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { ticks: { color: "#888" }, grid: { display: false } },
+                    y: { 
+                        ticks: { color: "#888", callback: function(value) { return value / 10000000 + " Cr"; } }, 
+                        grid: { color: "#222" } 
+                    }
+                },
+                plugins: { legend: { labels: { color: "#fff" } } }
+            }
+        });
+        // Navigation Logic
+        function setActive(element) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Chart Data
+        const states = {{ states | tojson | safe }};
+        const age0_5 = {{ age_0_5 | tojson | safe }};
+        const age5_17 = {{ age_5_17 | tojson | safe }};
+        const age18 = {{ age_18 | tojson | safe }};
+
+        const ctx = document.getElementById("ageChart").getContext("2d");
+
+        new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: states,
+                datasets: [
+                    {
+                        label: "Age 0-5",
+                        data: age0_5,
+                        backgroundColor: "#39ff14", 
+                        barThickness: 15
+                    },
+                    {
+                        label: "Age 5-17",
+                        data: age5_17,
+                        backgroundColor: "#00cc00", 
+                        barThickness: 15
+                    },
+                    {
+                        label: "Age 18+",
+                        data: age18,
+                        backgroundColor: "#006600", 
+                        barThickness: 15
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { ticks: { color: "#888" }, grid: { display: false } },
+                    y: { ticks: { color: "#888" }, grid: { color: "#222" } }
+                },
+                plugins: { legend: { labels: { color: "#fff" } } }
+            }
+        });
+    </script>
+</body>
+</html>
