@@ -103,11 +103,7 @@
     </footer>
 
     <script>
-        // --- EXISTING CHART CODE (Keep your AgeChart code here) --- 
-        // ... (Don't delete the code for ageChart) ...
-
-
-        // --- NEW PREDICTION CHART CODE ---
+        
         const years = {{ years | tojson | safe }};
         const pastData = {{ past_enrolment | tojson | safe }};
         const futureData = {{ future_enrolment | tojson | safe }};
@@ -122,7 +118,7 @@
                     {
                         label: "Historical Data (2015-2025)",
                         data: pastData,
-                        borderColor: "#39ff14", // Neon Green
+                        borderColor: "#39ff14",
                         backgroundColor: "rgba(57, 255, 20, 0.2)",
                         borderWidth: 2,
                         tension: 0.4,
@@ -131,8 +127,8 @@
                     {
                         label: "AI Prediction (2026-2028)",
                         data: futureData,
-                        borderColor: "#ffffff", // White for Future
-                        borderDash: [10, 5],    // Dashed Line
+                        borderColor: "#ffffff", 
+                        borderDash: [10, 5],    
                         borderWidth: 2,
                         tension: 0.4,
                         pointRadius: 4,
@@ -153,7 +149,7 @@
                 plugins: { legend: { labels: { color: "#fff" } } }
             }
         });
-        // Navigation Logic
+        
         function setActive(element) {
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
@@ -161,7 +157,7 @@
             element.classList.add('active');
         }
 
-        // Chart Data
+      
         const states = {{ states | tojson | safe }};
         const age0_5 = {{ age_0_5 | tojson | safe }};
         const age5_17 = {{ age_5_17 | tojson | safe }};
