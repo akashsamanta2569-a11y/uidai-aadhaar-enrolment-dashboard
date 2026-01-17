@@ -22,13 +22,26 @@
     </div>
 
     <nav>
-        <ul>
-            <li><a href="#home" class="nav-link active" onclick="setActive(this)">Home</a></li>
-            <li><a href="#about" class="nav-link" onclick="setActive(this)">About</a></li>
-            <li><a href="#dashboard" class="nav-link" onclick="setActive(this)">Dashboard</a></li>
-            <li><a href="#insights" class="nav-link" onclick="setActive(this)">Insights</a></li>
-        </ul>
-    </nav>
+    <ul>
+        <li><a href="#home" class="nav-link active" onclick="setActive(this)">Home</a></li>
+        <li><a href="#about" class="nav-link" onclick="setActive(this)">About</a></li>
+        <li><a href="#dashboard" class="nav-link" onclick="setActive(this)">Dashboard</a></li>
+        
+        {% if current_user.is_authenticated %}
+            <li>
+                <a href="/profile" class="nav-link" style="color:var(--neon-green);">
+                    <i class="fas fa-user"></i> {{ current_user.username }}
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="/login" class="nav-link">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>
 </header>
     <section id="home" class="hero">
         <h1>UIDAI Aadhaar Enrolment <br><span class="highlight">Dashboard</span></h1>

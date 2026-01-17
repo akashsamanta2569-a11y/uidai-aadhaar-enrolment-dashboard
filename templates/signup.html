@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up - AadhaarGati</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body style="display:flex; justify-content:center; align-items:center; height:100vh;">
+    <div class="card" style="width: 300px; text-align:center;">
+        <h2 style="color:var(--neon-green);">Sign Up</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Choose Username" required style="width:90%; padding:10px; margin:10px 0; background:#222; border:1px solid #444; color:#fff;">
+            <input type="password" name="password" placeholder="Choose Password" required style="width:90%; padding:10px; margin:10px 0; background:#222; border:1px solid #444; color:#fff;">
+            <button type="submit" class="btn-glow" style="width:100%; margin-top:10px;">Create Account</button>
+        </form>
+        <p style="margin-top:20px; color:#888;">Already have an account? <a href="/login" style="color:var(--neon-green);">Login</a></p>
+    </div>
+</body>
+</html>

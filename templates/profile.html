@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="display: flex; flex-direction: column; height: 100vh; margin: 0;">
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-fingerprint"></i></div>
+            <div class="logo-text"><span class="main-text">AADHAAR<span class="highlight">GATI</span></span></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/" class="nav-link">Back to Dashboard</a></li>
+                <li><a href="/logout" class="nav-link" style="color:red;">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+        
+        <div class="card" style="width: 400px; text-align: center; padding: 40px; border: 1px solid #333; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+            
+            <div style="width: 100px; height: 100px; background: #222; border-radius: 50%; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; border: 2px solid var(--neon-green);">
+                <i class="fas fa-user" style="font-size: 50px; color: var(--neon-green);"></i>
+            </div>
+
+            <h2 style="margin-bottom: 5px;">Welcome, <span style="color: #fff;">{{ name }}</span>!</h2>
+            <p style="color: #888; font-size: 0.9rem; margin-bottom: 20px;">Role: Authorized Official</p>
+
+            <div style="border-top: 1px solid #333; border-bottom: 1px solid #333; padding: 15px 0; margin: 20px 0;">
+                <p style="margin: 5px 0;">Status: <span style="color: var(--neon-green); font-weight: bold;">Active</span></p>
+                <p style="margin: 5px 0;">Access Level: <span style="color: yellow; font-weight: bold;">Full Analytics</span></p>
+            </div>
+
+            <a href="/">
+                <button class="btn-glow" style="width: 100%;">Open Dashboard</button>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
