@@ -1,13 +1,13 @@
+/* =========================================
+   1. GLOBAL VARIABLES & RESET
+   ========================================= */
 html {
     scroll-behavior: smooth;
 }
 
 :root {
-    --bg-color: #050505;}
-    
-:root {
     --bg-color: #050505;
-    --card-bg: #0f0f0f;
+    --card-bg: rgba(15, 15, 15, 0.8); /* Made slightly transparent */
     --neon-green: #39ff14;
     --text-main: #ffffff;
     --text-muted: #a0a0a0;
@@ -17,21 +17,32 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
-    background-color: var(--bg-color);
     color: var(--text-main);
     overflow-x: hidden;
+
+    /* --- NEW CHANGE: Digital India Background --- */
+    /* This applies the image to the whole site */
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                url('/static/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Keeps bg still when scrolling */
+    min-height: 100vh;
 }
 
-a { text-decoration: none; color: inherit; }
+a { text-decoration: none; color: inherit; transition: 0.3s; }
 ul { list-style: none; padding: 0; }
 
-
+/* =========================================
+   2. HEADER & NAVIGATION (Kept from Old Code)
+   ========================================= */
 header {
     display: flex;
     justify-content: space-between; 
     align-items: center;
     padding: 15px 50px;
-    background: rgba(5, 5, 5, 0.95);
+    background: rgba(5, 5, 5, 0.9); /* More transparent */
+    backdrop-filter: blur(10px);    /* Blur effect for header too! */
     border-bottom: 1px solid #333;
     position: sticky;
     top: 0;
@@ -59,11 +70,7 @@ header {
     box-shadow: 0 0 10px rgba(57, 255, 20, 0.2);
 }
 
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
+.logo-text { display: flex; flex-direction: column; line-height: 1.1; }
 
 .main-text {
     font-size: 1.4rem;
@@ -79,32 +86,25 @@ header {
     letter-spacing: 2px;
 }
 
-.highlight {
-    color: var(--neon-green);
-}
+.highlight { color: var(--neon-green); }
 
-
-nav ul {
-    display: flex;
-    gap: 30px; 
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
+nav ul { display: flex; gap: 30px; margin: 0; padding: 0; }
 
 nav a {
     text-decoration: none;
     color: #aaa;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: 0.3s;
 }
 
 nav a:hover, nav a.active {
     color: var(--neon-green);
+    text-shadow: 0 0 8px var(--neon-green);
 }
 
-
+/* =========================================
+   3. HERO SECTION (Kept from Old Code)
+   ========================================= */
 .hero {
     text-align: center;
     padding: 80px 20px;
@@ -112,15 +112,7 @@ nav a:hover, nav a.active {
     margin: 0 auto;
 }
 
-.hero h1 {
-    font-size: 3.5rem;
-    margin-bottom: 10px;
-}
-
-.highlight {
-    color: var(--neon-green);
-    text-shadow: 0 0 20px rgba(57, 255, 20, 0.3);
-}
+.hero h1 { font-size: 3.5rem; margin-bottom: 10px; }
 
 .hero p {
     color: var(--text-muted);
@@ -147,29 +139,77 @@ nav a:hover, nav a.active {
     box-shadow: 0 0 20px rgba(57, 255, 20, 0.6);
 }
 
-
-.info-section {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #0a0a0a;
-    border: 1px solid #222;
-    border-left: 4px solid var(--neon-green);
-    padding: 30px;
-    border-radius: 8px;
+/* =========================================
+   4. NEW LOGIN & SIGNUP STYLES (Added!)
+   ========================================= */
+/* This centers the login box on the screen */
+.login-container, 
+.signup-container, 
+.profile-card {
+    width: 350px;
+    margin: 80px auto; 
+    
+    /* GLASS EFFECT */
+    background: rgba(0, 0, 0, 0.6); 
+    backdrop-filter: blur(12px);     
+    -webkit-backdrop-filter: blur(12px);
+    
+    border: 1px solid rgba(57, 255, 20, 0.3); 
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.15); 
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
 }
 
-.info-section h3 {
-    margin-top: 0;
-    color: var(--text-main);
+/* Make profile wider */
+.profile-card { width: 450px; }
+
+/* Input Fields */
+input[type="text"], 
+input[type="password"], 
+input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
 }
 
-.info-section p {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.5;
+input:focus {
+    border-color: var(--neon-green);
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
 }
 
+/* Green Buttons */
+button, .btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background: var(--neon-green);
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
 
+button:hover, .btn:hover {
+    background: #fff;
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+/* =========================================
+   5. DASHBOARD & CARDS (Updated for Glass)
+   ========================================= */
 .section-title {
     text-align: center;
     font-size: 2rem;
@@ -186,13 +226,12 @@ nav a:hover, nav a.active {
 }
 
 .card {
-    background: var(--card-bg);
+    background: rgba(15, 15, 15, 0.7); /* Glass-like */
+    backdrop-filter: blur(5px);
     padding: 30px;
     border: 1px solid #222;
     border-radius: 10px;
     transition: 0.3s;
-    position: relative;
-    overflow: hidden;
 }
 
 .card:hover {
@@ -210,43 +249,18 @@ nav a:hover, nav a.active {
 .card h3 { font-size: 1.1rem; margin: 0 0 10px; }
 .card p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
 
-
+/* Chart Wrapper */
 .chart-wrapper {
     max-width: 1100px;
     margin: 0 auto;
-    background: #0a0a0a; 
+    background: rgba(10, 10, 10, 0.8); 
+    backdrop-filter: blur(5px);
     border: 1px solid #333;
     padding: 30px;
     border-radius: 12px;
-    position: relative;
 }
 
-
-.insight-box {
-    max-width: 1100px;
-    margin: 60px auto;
-    padding: 25px;
-    border: 1px solid var(--neon-green);
-    border-radius: 10px;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    background: radial-gradient(circle at center, rgba(57,255,20,0.05) 0%, rgba(0,0,0,0) 70%);
-    box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
-}
-
-.insight-icon {
-    font-size: 1.5rem;
-    color: var(--neon-green);
-    background: rgba(57, 255, 20, 0.1);
-    padding: 10px;
-    border-radius: 50%;
-}
-
-.insight-content h4 { margin: 0 0 5px; font-size: 1.1rem; }
-.insight-content p { margin: 0; color: var(--text-muted); font-size: 0.9rem; }
-
-
+/* Footer */
 footer {
     text-align: center;
     padding: 40px;
@@ -254,4 +268,5 @@ footer {
     font-size: 0.8rem;
     border-top: 1px solid #111;
     margin-top: 50px;
+    background: rgba(0,0,0,0.8);
 }
