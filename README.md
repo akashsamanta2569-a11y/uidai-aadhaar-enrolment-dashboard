@@ -37,3 +37,15 @@ AadhaarGati/
 ├── Enrollment.ipynb           
 ├── requirements.txt           
 └── README.md
+
+🚀 Future Scalability
+* **GIS Spatial Mapping:** Integration of map views to visualize "dark zones" overlayed with local hospital birth data.
+* **Real-Time Data Streams:** Upgrading to process live API streams from UIDAI servers.
+* **Automated Resource Allocation:** Expanding the AI model to recommend the exact number of enrollment kits needed per district dynamically.
+
+👥 Team CloudZ
+* Jahangir Alam Mondal (Team Leader)
+* Akash Samanta
+* Suman Sahoo
+* Supreeti Moulick
+* Smriti Rahaman
